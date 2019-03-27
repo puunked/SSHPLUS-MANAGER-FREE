@@ -1,7 +1,7 @@
 #!/bin/bash
-wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/SSHPLUS-MANAGER-FREE/master/Install/list > /dev/null 2>&1
-wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/SSHPLUS-MANAGER-FREE/master/versao -O /bin/versao > /dev/null 2>&1
-wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/SSHPLUS-MANAGER-FREE/master/Install/licence -O /usr/lib/licence > /dev/null 2>&1
+wget https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Install/list > /dev/null 2>&1
+wget https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/versao -O /bin/versao > /dev/null 2>&1
+wget https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Install/licence -O /usr/lib/licence > /dev/null 2>&1
 clear
 [[ "$EUID" -ne 0 ]] && echo -e "\033[1;33mDesculpe, \033[1;33mvocê precisa executar como root\033[0m" && rm -rf $HOME/Plus > /dev/null 2>&1 && return 1
 cd $HOME
@@ -128,9 +128,12 @@ echo ""
 inst_pct () {
 apt-get install squid3 bc screen nano unzip dos2unix -y > /dev/null 2>&1
 apt-get install nload -y > /dev/null 2>&1
+apt-get install htop -y > /dev/null 2>&1
 apt-get install jq -y > /dev/null 2>&1
+apt-get install lsof > /dev/null 2>&1
 apt-get install curl -y > /dev/null 2>&1
 apt-get install figlet -y > /dev/null 2>&1
+apt-get install python -y > /dev/null 2>&1
 apt-get install python3 -y > /dev/null 2>&1
 apt-get install python-pip -y > /dev/null 2>&1
 pip install speedtest-cli > /dev/null 2>&1
@@ -151,19 +154,17 @@ fun_bar 'source list'
 rm sshplus* > /dev/null 2>&1
 sleep 2
 clear
-apt-get install lsof > /dev/null 2>&1
 echo ""
 echo -e "\033[0;34m═════════════════════════════════════════════════\033[0m"
 echo -e "         \033[1;33m● \033[1;32mINSTALACAO CONCLUIDA \033[1;33m●\033[0m"
 echo ""
-echo -e "\033[1;31m● \033[1;33mProxy Squid Instalado, Portas: 80, 8080, 3128\033[0m"
+echo -e "\033[1;31m● \033[1;33mProxy Squid Instalado, Porta: 80\033[0m"
 echo -e "\033[1;31m● \033[1;33mOpenSSH rodando nas portas 22 e 443\033[0m"
 echo -e "\033[1;31m● \033[1;33mScript para gerenciamento de usuários instalado\033[0m"
 echo -e "\033[1;31m● \033[1;33mComandos disponíveis Execulte \033[1;32mmenu \033[1;33mou \033[1;32majuda\033[0m"
 echo -e "\033[0;34m═════════════════════════════════════════════════\033[0m"
 echo ""
 sed -i "126d" /etc/ssh/sshd_config > /dev/null 2>&1
-sed -i '$a Port 22' /etc/ssh/sshd_config  > /dev/null 2>&1
 service ssh restart > /dev/null 2>&1
 cd $HOME
 if [[ "$optiondb" = '2' ]]; then
