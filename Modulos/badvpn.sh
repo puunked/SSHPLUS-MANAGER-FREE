@@ -39,6 +39,10 @@ if ps x | grep "udpvpn"|grep -v grep 1>/dev/null 2>/dev/null; then
    echo ""
    echo -e "\033[1;32mO BADVPN JA ESTA ATIVO !\033[0m"
    sleep 1
+   if grep -w "badvpn-udpgw" /etc/rc.local > /dev/null 2>&1; then
+   echo ""
+   else
+   sed -i '$ iscreen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10' /etc/rc.local
    fi
    badvpn
  else
@@ -47,11 +51,7 @@ if ps x | grep "udpvpn"|grep -v grep 1>/dev/null 2>/dev/null; then
    fun_udpon () {
       screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10
       sleep 1
-   if grep -w "badvpn-udpgw" /etc/rc.local > /dev/null 2>&1; then
-   echo ""
-   else
-   sed -i '$ iscreen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10' /etc/rc.local
-}
+   }
    echo ""
    fun_bar 'fun_udpon'
    echo ""
@@ -171,7 +171,7 @@ echo -e "\033[1;33mUDP Para Jogos Online, Chamadas tipo VoIP em Apps\033[0m"
 echo -e "\033[1;33mComo whatsapp, mensseger e muito mais..\033[0m"
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[1;33m"
 echo ""
-read -p "Deseja continuar? [s/n]: " -e -i s resposta
+read -p "Deseja continuar? [s/n]: " -e -i n resposta
 if [[ "$resposta" = 's' ]]; then
 	clear
 	echo -e "\033[1;32mINSTALANDO O BADVPN... \033[1;37m"
