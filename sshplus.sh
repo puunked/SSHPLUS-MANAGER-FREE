@@ -46,7 +46,7 @@ echo -e "\033[1;33mvisualizacao...\033[0m"
 chmod +x lista; ./lista > /dev/null 2>&1
 sleep 1
 echo ""
-if $HOME/Plus; then
+if $HOME/lista; then
   rm -rf $HOME/Plus $_lsk/lista > /dev/null 2>&1
   sleep 1
   clear; exit 1
