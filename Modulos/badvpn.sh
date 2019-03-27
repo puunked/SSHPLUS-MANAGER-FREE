@@ -38,7 +38,12 @@ function udp2 () {
 if ps x | grep "udpvpn"|grep -v grep 1>/dev/null 2>/dev/null; then
    echo ""
    echo -e "\033[1;32mO BADVPN JA ESTA ATIVO !\033[0m"
-   sleep 3
+   sleep 1
+   if grep -w "badvpn-udpgw" /etc/rc.local > /dev/null 2>&1; then
+   echo ""
+   else
+   sed -i '$ iscreen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10' /etc/rc.local
+   fi
    badvpn
  else
    echo ""
@@ -64,6 +69,9 @@ echo ""
    fun_stopbad () {
    sleep 1
    screen -r -S "udpvpn" -X quit
+   if grep -w "badvpn-udpgw" /etc/rc.local > /dev/null 2>&1; then
+   sed -i '/badvpn-udpgw.off/d' /etc/rc.local
+   fi
    screen -wipe 1>/dev/null 2>/dev/null
    sleep 1
    }
