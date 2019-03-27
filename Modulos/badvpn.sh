@@ -69,9 +69,6 @@ echo ""
    fun_stopbad () {
    sleep 1
    screen -r -S "udpvpn" -X quit
-   if grep -w "badvpn-udpgw" /etc/rc.local > /dev/null 2>&1; then
-   sed -i '/badvpn-udpgw.off/d' /etc/rc.local
-   fi
    screen -wipe 1>/dev/null 2>/dev/null
    sleep 1
    }
