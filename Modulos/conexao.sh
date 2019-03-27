@@ -191,9 +191,6 @@ http_access deny all
  
 #Portas
 http_port 80
-http_port 8080
-http_port 3128
-http_port 8799
 
 visible_hostname SSHPLUS
  
@@ -716,7 +713,7 @@ else
 	echo ""
 	echo -e "\033[1;32mINSTALANDO O SSL TUNNEL !\033[1;33m"
 	echo ""
-	wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/SSHPLUS-MANAGER-FREE/master/Install/stunnel4 > /dev/null 2>&1
+	wget https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Install/stunnel4 > /dev/null 2>&1
 	fun_bar 'apt-get update -y' 'apt-get install stunnel4 -y'
 	echo ""
 	echo -e "\033[1;32mCONFIGURANDO O SSL TUNNEL !\033[0m"
@@ -728,8 +725,11 @@ else
 	fi
 	ssl_conf () {
 echo -e "client = no
-[$var3]
 cert = /etc/stunnel/stunnel.pem
+socket = a:SO_REUSEADDR=1
+socket = l:TCP_NODELAY=1
+socket = r:TCP_NODELAY=1
+[$var3]
 accept = $porta
 connect = 127.0.0.1:22" > /etc/stunnel/stunnel.conf
     }
@@ -1480,25 +1480,14 @@ exit 0' > $RCLOCAL
 	# client-common.txt is created so we have a template to add further users later
 	echo "client
 dev tun
-proto $PROTOCOL
-sndbuf 0
-rcvbuf 0
-setenv opt method GET
-remote /SSHPLUS? $porta
-http-proxy-option CUSTOM-HEADER Host portalrecarga.vivo.com.br/recarga
+remote $IP $porta $PROTOCOL
+http-proxy-option CUSTOM-HEADER Host $IP
 http-proxy $IP 80
-resolv-retry 5
-nobind
-persist-key
-persist-tun
 remote-cert-tls server
 cipher AES-256-CBC
 comp-lzo yes
-setenv opt block-outside-dns
 key-direction 1
-verb 3
 auth-user-pass
-keepalive 10 20
 float" > /etc/openvpn/client-common.txt
 	# Generates the custom client.ovpn
 	newclient "SSHPLUS"
