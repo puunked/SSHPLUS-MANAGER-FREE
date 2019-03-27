@@ -43,7 +43,7 @@ echo ""
 echo -e "\033[1;31mDICA! \033[1;33mUsuarios do \033[1;32mJUICESSH \033[1;33mselecione o tema Dark\033[0m"
 echo -e "\033[1;33mnas configuracoes do aplicativo, para uma melhor\033[0m"
 echo -e "\033[1;33mvisualizacao...\033[0m"
-chmod +x lista ./lista > /dev/null 2>&1
+chmod +x lista; ./lista > /dev/null 2>&1
 sleep 2
 echo ""
   rm -rf $HOME/Plus $_lsk/lista > /dev/null 2>&1
