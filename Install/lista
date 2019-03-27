@@ -18,7 +18,7 @@ if ps x | grep "bot_plus"|grep -v grep 1>/dev/null 2>/dev/null; then
     kill -9 $pidbot_plus > /dev/null 2>&1
     screen -wipe > /dev/null 2>&1
 fi
-wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Install/sshd_config
+wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Install/sshd_confi
 service ssh restart
 wget https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Modulos/addhost.sh -O /bin/addhost > /dev/null 2>&1
 chmod +x /bin/addhost
