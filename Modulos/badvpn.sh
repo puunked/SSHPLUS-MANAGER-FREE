@@ -168,7 +168,7 @@ echo -e "\033[1;33mUDP Para Jogos Online, Chamadas tipo VoIP em Apps\033[0m"
 echo -e "\033[1;33mComo whatsapp, mensseger e muito mais..\033[0m"
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[1;33m"
 echo ""
-read -p "Deseja continuar? [s/n]: " -e -i n resposta
+read -p "Deseja continuar? [s/n]: " -e -i s resposta
 if [[ "$resposta" = 's' ]]; then
 	clear
 	echo -e "\033[1;32mINSTALANDO O BADVPN... \033[1;37m"
