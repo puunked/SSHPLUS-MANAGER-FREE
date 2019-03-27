@@ -39,18 +39,18 @@ if ps x | grep "udpvpn"|grep -v grep 1>/dev/null 2>/dev/null; then
    echo ""
    echo -e "\033[1;32mO BADVPN JA ESTA ATIVO !\033[0m"
    sleep 1
-   if grep -w "badvpn-udpgw" /etc/rc.local > /dev/null 2>&1; then
-   echo ""
-   else
-   sed -i '$ iscreen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10' /etc/rc.local
-   fi
    badvpn
  else
    echo ""
    echo -e "\033[1;32mINICIANDO O BADVPN... \033[0m"
    fun_udpon () {
-      screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10
-      sleep 1
+   screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10
+   if grep -w "badvpn-udpgw" /etc/rc.local > /dev/null 2>&1; then
+   echo ""
+   else
+   sed -i '$ iscreen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10' /etc/rc.local
+   fi
+sleep 1
    }
    echo ""
    fun_bar 'fun_udpon'
