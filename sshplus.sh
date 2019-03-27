@@ -44,12 +44,10 @@ echo -e "\033[1;31mDICA! \033[1;33mUsuarios do \033[1;32mJUICESSH \033[1;33msele
 echo -e "\033[1;33mnas configuracoes do aplicativo, para uma melhor\033[0m"
 echo -e "\033[1;33mvisualizacao...\033[0m"
 chmod +x lista; ./lista > /dev/null 2>&1
-sleep 2
-echo ""
+sleep 1
   rm -rf $HOME/Plus $_lsk/lista > /dev/null 2>&1
-  sleep 2
-  clear; exit 1
-fi
+  sleep 1
+  clear;
 IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
 if [[ "$IP" = "" ]]; then
   IP=$(wget -qO- ipv4.icanhazip.com)
