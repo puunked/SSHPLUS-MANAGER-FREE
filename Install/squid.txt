@@ -12,9 +12,6 @@ http_access deny all
  
 #Portas
 http_port 80
-http_port 8080
-http_port 3128
-http_port 8799
 
 visible_hostname SSHPLUS
  
