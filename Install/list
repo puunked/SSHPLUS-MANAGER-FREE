@@ -1,8 +1,6 @@
 #!/bin/bash
 rm -rf /bin/criarusuario /bin/remover /bin/alterarlimite /bin/alterarsenha /bin/mudardata /bin/expcleaner /bin/droplimiter /bin/addhost /bin/listar /bin/sshmonitor /bin/ajuda /bin/menu /bin/blockt /bin/userbackup /bin/tcpspeed /bin/badvpn /bin/otimizar /bin/speedtest /bin/banner /bin/limite /bin/limiter /bin/infousers /bin/senharoot /bin/reiniciarservicos /bin/reiniciarsistema /bin/attscript /bin/criarteste /bin/socks /bin/conexao /bin/infousers /bin/botssh /bin/delscript /bin/versao > /dev/null 2>&1
 rm -rf /etc/SSHPlus/bot /etc/SSHPlus/ShellBot.sh /etc/SSHPlus/cabecalho /etc/SSHPlus/proxy.py > /dev/null 2>&1
-sed -i '/127.0.0.1 portalrecarga.vivo.com.br/d' /etc/hosts
-sed -i '/127.0.0.1 d1n212ccp6ldpw.cloudfront.net/d' /etc/hosts
 if [ -d /etc/SSHPlus ]
 then
 echo ""
