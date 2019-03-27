@@ -133,8 +133,7 @@ cd $_lsk
 fun_bar 'source list'
 rm sshplus* > /dev/null 2>&1
 sleep 2
-cat /dev/null > ~/.bash_history && history -c
-clear
+cat /dev/null > ~/.bash_history && history -c && clear
 echo ""
 echo -e "\033[0;34m═════════════════════════════════════════════════\033[0m"
 echo -e "         \033[1;33m● \033[1;32mINSTALACAO CONCLUIDA \033[1;33m●\033[0m"
