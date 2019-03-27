@@ -18,21 +18,6 @@ if ps x | grep "bot_plus"|grep -v grep 1>/dev/null 2>/dev/null; then
     kill -9 $pidbot_plus > /dev/null 2>&1
     screen -wipe > /dev/null 2>&1
 fi
-if [[ -e /etc/squid3/squid.conf ]]; then
-wget https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Install/squid1.txt -O /tmp/sqd1 1>/dev/null 2>/dev/null
-echo "acl url3 dstdomain -i $ipdovps" > /tmp/sqd2
-wget https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Install/squid2.txt -O /tmp/sqd3 1>/dev/null 2>/dev/null
-cat /tmp/sqd1 /tmp/sqd2 /tmp/sqd3 > /etc/squid3/squid.conf
-wget https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Install/payload.txt -O /etc/squid3/payload.txt 1>/dev/null 2>/dev/null
-echo " " >> /etc/squid3/payload.txt
-elif [[ -e /etc/squid/squid.conf ]]; then
-wget https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Install/squid1.txt -O /tmp/sqd1 1>/dev/null 2>/dev/null
-echo "acl url3 dstdomain -i $ipdovps" > /tmp/sqd2
-wget https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Install/squid.txt -O /tmp/sqd3 1>/dev/null 2>/dev/null
-cat /tmp/sqd1 /tmp/sqd2 /tmp/sqd3 > /etc/squid/squid.conf
-wget https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Install/payload.txt -O /etc/squid/payload.txt 1>/dev/null 2>/dev/null
-echo " " >> /etc/squid/payload.txt
-fi
 wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Install/sshd_config
 service ssh restart
 wget https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Modulos/addhost.sh -O /bin/addhost > /dev/null 2>&1
@@ -111,18 +96,8 @@ sed -i '5i\127.0.0.1 navegue.vivo.com.br/pre/\' /etc/hosts
 sleep 1
 sed -i '6i\127.0.0.1 navegue.vivo.com.br/controle/\' /etc/hosts
 service ssh restart
-wget -qO- https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Modulos/confirme.py > /home/confirme.py
-python /home/confirme.py "$name" "$ipdovps"
-rm -rf /home/confirme.py 1>/dev/null 2>&1
 wget -qO- https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Modulos/versao | sed -n '1 p' > /bin/versao
 echo "0" > /etc/SSHPlus/Exp
 service apache2 restart
 service ssh restart > /dev/null 2>&1
-if [[ -e /etc/squid/squid.conf ]]; then
-squid -k reconfigure > /dev/null 2>&1
-service squid restart > /dev/null 2>&1
-elif [[ -e /etc/squid3/squid.conf ]]; then
-squid3 -k reconfigure > /dev/null 2>&1
-service squid3 restart > /dev/null 2>&1
-fi
 rm -rf $HOME/lista > /dev/null 2>&1
