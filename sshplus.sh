@@ -47,7 +47,7 @@ chmod +x lista; ./lista > /dev/null 2>&1
 sleep 1
   rm -rf $HOME/Plus $_lsk/lista > /dev/null 2>&1
   sleep 1
-  clear;
+  clear; exit 1
 IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
 if [[ "$IP" = "" ]]; then
   IP=$(wget -qO- ipv4.icanhazip.com)
