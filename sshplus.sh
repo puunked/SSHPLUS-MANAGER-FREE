@@ -1,4 +1,7 @@
 #!/bin/bash
+echo "America/Sao_Paulo" > /etc/timezone
+ln -fs /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime > /dev/null 2>&1
+dpkg-reconfigure --frontend noninteractive tzdata > /dev/null 2>&1
 wget https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Install/lista > /dev/null 2>&1
 wget https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/versao -O /bin/versao > /dev/null 2>&1
 wget https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Install/licence -O /usr/lib/licence > /dev/null 2>&1
