@@ -143,7 +143,7 @@ else
 clear
 echo -e "\E[44;1;37m              INSTALADOR SQUID                \E[0m"
 echo ""
-echo -e "\033[1;33mINSTALANDO SQUID NAS PORTAS \033[1;32m80\033[1;37m/\033[1;32m8080\033[1;37m/\033[1;32m3128\033[1;37m/\033[1;32m8799\033[0m" 
+echo -e "\033[1;33mINSTALANDO SQUID NA PORTA \033[1;32m80\033[0m" 
 echo ""
 IP=$(wget -qO- ipv4.icanhazip.com)
 echo -ne "\033[1;32mPARA CONTINUAR CONFIRME SEU IP: \033[1;37m"; read -e -i $IP ipdovps
