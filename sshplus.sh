@@ -95,9 +95,9 @@ echo ""
 fun_attlist () {
     apt-get update -y
     if service apache2 status; then
-    service apache2 stop
-    else
-    apt-get remove apache2 -y
+    sed -i "s/Listen 80/Listen 81/g" /etc/apache2/ports.conf
+    service apache2 restart
+	   /etc/init.d/apache2 restart
     fi
 }
 fun_bar 'fun_attlist'
