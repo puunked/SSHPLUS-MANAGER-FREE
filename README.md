@@ -1,4 +1,4 @@
-﻿# SSHPLUS-MANAGER-FREE
+﻿# SSHPLUS-MANAGER - by @crazy_vpn
 
 Manager Script
 
