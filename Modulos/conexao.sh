@@ -692,15 +692,13 @@ if netstat -nltp|grep 'stunnel4' 1>/dev/null 2>/dev/null;then
 else
 	clear
 	echo -e "\E[44;1;37m           INSTALADOR SSL TUNNEL             \E[0m"
-	echo ""
-	echo -e "\033[1;33mVC ESTA PRESTES A INSTALAR O SSL TUNNEL !\033[0m"
+	echo -e "\n\033[1;33mVC ESTA PRESTES A INSTALAR O SSL TUNNEL !\033[0m"
 	echo ""
 	echo -ne "\033[1;32mDESEJA CONTINUAR \033[1;31m? \033[1;33m[s/n]:\033[1;37m "; read resposta
 	if [[ "$resposta" = 's' ]]; then
+	echo -e "\n\033[1;33mDEFINA UMA PORTA PARA O SSL TUNNEL !\033[0m"
 	echo ""
-	echo -e "\033[1;33mDEFINA UMA PORTA PARA O SSL TUNNEL !\033[0m"
-	echo ""
-	echo -ne "\033[1;32mQUAL A PORTA \033[1;33m?\033[1;37m "; read porta
+	read -p "$(echo -e "\033[1;32mQUAL PORTA DESEJA UTILIZAR? \033[1;37m")" -e -i 443 porta
 	if [[ -z "$porta" ]]; then
 		echo ""
 		echo -e "\033[1;31mPorta invalida!"
@@ -708,51 +706,31 @@ else
 		clear
 		fun_conexao
 	fi
-	verif_ptrs
+	verif_ptrs $porta
+	echo -e "\n\033[1;32mINSTALANDO O SSL TUNNEL !\033[1;33m"
 	echo ""
-	echo -e "\033[1;32mINSTALANDO O SSL TUNNEL !\033[1;33m"
-	echo ""
-	wget https://raw.githubusercontent.com/twossh/SSHPLUS-MANAGER-FREE/master/Install/stunnel4 > /dev/null 2>&1
 	fun_bar 'apt-get update -y' 'apt-get install stunnel4 -y'
+	echo -e "\n\033[1;32mCONFIGURANDO O SSL TUNNEL !\033[0m"
 	echo ""
-	echo -e "\033[1;32mCONFIGURANDO O SSL TUNNEL !\033[0m"
-	echo ""
-	if netstat -nltp|grep 'dropbear'> /dev/null; then
-		var3="dropbear"
-	else
-		var3="ssh"
-	fi
 	ssl_conf () {
-echo -e "client = no
-cert = /etc/stunnel/stunnel.pem
-socket = a:SO_REUSEADDR=1
-socket = l:TCP_NODELAY=1
-socket = r:TCP_NODELAY=1
-[$var3]
-accept = $porta
-connect = 127.0.0.1:22" > /etc/stunnel/stunnel.conf
+    echo -e "cert = /etc/stunnel/stunnel.pem\nclient = no\nsocket = a:SO_REUSEADDR=1\nsocket = l:TCP_NODELAY=1\nsocket = r:TCP_NODELAY=1\n\n[stunnel]\nconnect = 127.0.0.1:22\naccept = ${porta}" > /etc/stunnel/stunnel.conf
     }
-    fun_bar 'ssl_conf' 'sleep 3'
-    cat stunnel4 > /etc/default/stunnel4
-    rm stunnel4
+    fun_bar 'ssl_conf'
+    echo -e "\n\033[1;32mCRIANDO CERTIFICADO !\033[0m"
     echo ""
-    echo -e "\033[1;32mCRIANDO CERTIFICADO !\033[0m"
-    echo ""
-    echo -e "\033[1;33mRESPONDA AS QUESTOES ABAIXO !\033[1;37m"
-    sleep 3
-    echo ""
-    openssl genrsa -out key.pem 2048
-    openssl req -new -x509 -key key.pem -out cert.pem -days 1095
-    cat key.pem cert.pem >> /etc/stunnel/stunnel.pem
-    rm key.pem cert.pem
-    clear
-    echo -e "\033[1;32mREINICIANDO O SSL TUNNEL !\033[0m"
+    ssl_certif () {
+    crt='br'
+    openssl genrsa -out key.pem 2048 > /dev/null 2>&1
+    (echo $crt; echo $crt; echo $crt; echo $crt; echo $crt; echo $crt; echo $crt)|openssl req -new -x509 -key key.pem -out cert.pem -days 1000 > /dev/null 2>&1
+    cat cert.pem key.pem >> /etc/stunnel/stunnel.pem
+    rm key.pem cert.pem > /dev/null 2>&1
+    sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
+    }
+    fun_bar 'ssl_certif'
+    echo -e "\033[1;32mINICIANDO O SSL TUNNEL !\033[0m"
     echo ""
     fun_finssl () {
     service stunnel4 restart
-    service squid3 restart
-    service squid restart
-    service dropbear restart
     service ssh restart
     }
     fun_bar 'fun_finssl'
